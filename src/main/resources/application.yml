@@ -39,11 +39,11 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.shinley.activiti.model
-
-# showSql
-logging:
-  level:
-    com:
-      shinley:
-        activiti:
-          mapper:debug
+#
+## showSql
+#logging:
+#  level:
+#    com:
+#      shinley:
+#        activiti:
+#          mapper:debug

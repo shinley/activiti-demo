@@ -12,7 +12,7 @@ public class TestActiviti {
     public void createTable() {
         ProcessEngineConfiguration processEngineConfiguration = ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration();
         processEngineConfiguration.setJdbcDriver("com.mysql.cj.jdbc.Driver");
-        processEngineConfiguration.setJdbcUrl("jdbc:mysql://localhost:3306/activiti?useUnicode=true&characterEncoding=utf8mb4&allowMultiQueries=true&autoReconnect=true");
+        processEngineConfiguration.setJdbcUrl("jdbc:mysql://localhost:3306/activiti?useUnicode=true&allowMultiQueries=true&autoReconnect=true");
         processEngineConfiguration.setJdbcUsername("root");
         processEngineConfiguration.setJdbcPassword("chen");
 
@@ -23,7 +23,13 @@ public class TestActiviti {
         // 工作流的核心对象， ProcessEnginee对象
         ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();
         System.out.println("processEngine:" + processEngine);
+    }
 
-
+    @Test
+    public void createTable2() {
+        // 加载classpath下名为activiti.cfg.xml文件， 创建核 心流程擎对象， 系统数据库会自动创建表
+        ProcessEngine processEngine = ProcessEngineConfiguration.createProcessEngineConfigurationFromResource("activiti.cfg.xml")
+                .buildProcessEngine();
+        System.out.println(processEngine);
     }
 }
