@@ -135,4 +135,40 @@ public class ProcessDefinitionTest {
         File file = new File("D:/" + resourceName);
         FileUtils.copyInputStreamToFile(in, file);
     }
+
+    /**
+     * 查询最新版本的流程定义
+     *
+     */
+    @Test
+    public void findLastVersionProcessDefinition() {
+        List<ProcessDefinition> list = processEngine.getRepositoryService()
+                .createProcessDefinitionQuery()
+                .latestVersion()
+                .list();
+    }
+
+    /**
+     * 删除流程定义(删除key相同的所有不同版本的流程定义)
+     */
+    @Test
+    public void deleteProcessDefinitionByKey() {
+        // 流程定义的key
+        String processDefinitionKey = "helloworld";
+        // 先使用流程定义的key查询流程定义， 查询出所有的版本
+        List<ProcessDefinition> list = processEngine.getRepositoryService()
+                .createProcessDefinitionQuery()
+                .processDefinitionKey(processDefinitionKey)
+                .list();
+
+        // 遍历， 获取每个流程定义的部署ID
+        if(list != null && list.size() > 0) {
+            for (ProcessDefinition pd: list) {
+                String deploymentId = pd.getDeploymentId();
+                processEngine.getRepositoryService()
+                        .deleteDeployment(deploymentId, true);
+            }
+        }
+    }
+
 }
