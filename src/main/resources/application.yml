@@ -29,3 +29,8 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.shinley.activiti.entity
