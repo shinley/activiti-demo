@@ -3,6 +3,7 @@ package com.shinley.activiti.config;
 import org.activiti.engine.*;
 import org.activiti.engine.delegate.event.ActivitiEventListener;
 import org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration;
+import org.activiti.spring.SpringProcessEngineConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
@@ -24,8 +25,9 @@ public class ActivitiConfig {
      * @return
      */
     @Bean
-    public StandaloneProcessEngineConfiguration processEngineConfiguration() {
-        StandaloneProcessEngineConfiguration configuration = new StandaloneProcessEngineConfiguration();
+    public SpringProcessEngineConfiguration processEngineConfiguration() {
+//        StandaloneProcessEngineConfiguration configuration = new StandaloneProcessEngineConfiguration();
+        SpringProcessEngineConfiguration configuration = new SpringProcessEngineConfiguration();
         configuration.setDataSource(dataSource);
         // 设置是否自动更新
         configuration.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
