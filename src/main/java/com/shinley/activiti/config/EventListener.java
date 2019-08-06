@@ -15,10 +15,7 @@ import java.util.Set;
 
 
 /**
- * @Description: 流程事件监听中心
- * @Author: xiewl
- * @Date: 2018/10/15 17:13
- * @Version 1.0
+ * 流程事件监听中心
  */
 @Component
 public class EventListener implements ActivitiEventListener, ExecutionListener, TaskListener {
