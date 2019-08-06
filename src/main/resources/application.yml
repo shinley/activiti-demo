@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://mysql.dev.autoai.com:3306/activiti?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+      url: jdbc:mysql://localhost:3306/activiti?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
       username: root
       password: chen
       initial-size: 10
@@ -29,6 +29,9 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+  activiti:
+    database-schema-update: true
+    check-process-definitions: false
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

@@ -10,9 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ActivitiDemoApplication {
 
-	@Autowired
-	private TaskService taskService;
-
 
 
 	public static void main(String[] args) {
