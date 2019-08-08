@@ -10,9 +10,10 @@
 
 
 		<bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
-			<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/activiti?useUnicode=true&amp;allowMultiQueries=true&amp;autoReconnect=true"/>
+			<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/activiti?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true&amp;autoReconnect=true"/>
 			<property name="jdbcDriver" value="com.mysql.cj.jdbc.Driver"/>
-			<property name="jdbcUsername" value="root"/>
+			<property name="jdbcUsername" value="activiti"/>
 			<property name="jdbcPassword" value="chen"/>
+            <property name="databaseSchemaUpdate" value="DB_SCHEMA_UPDATE_CREATE"/>
 		</bean>
 </beans>

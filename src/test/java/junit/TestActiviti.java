@@ -22,7 +22,7 @@ public class TestActiviti {
     public void createTable() {
         ProcessEngineConfiguration processEngineConfiguration = ProcessEngineConfiguration.createStandaloneProcessEngineConfiguration();
         processEngineConfiguration.setJdbcDriver("com.mysql.cj.jdbc.Driver");
-        processEngineConfiguration.setJdbcUrl("jdbc:mysql://localhost:3306/activiti?useUnicode=true&allowMultiQueries=true&autoReconnect=true");
+        processEngineConfiguration.setJdbcUrl("jdbc:mysql://localhost:3306/activiti?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true");
         processEngineConfiguration.setJdbcUsername("root");
         processEngineConfiguration.setJdbcPassword("chen");
 
