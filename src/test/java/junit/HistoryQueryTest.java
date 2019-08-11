@@ -21,14 +21,14 @@ public class HistoryQueryTest {
 
     @Test
     public void findHistoryProcessInstance() {
-        String processInstanceId = "1001";
+        String processInstanceId = "2501";
         HistoricProcessInstance historicProcessInstance = processEngine.getHistoryService()
                 .createHistoricProcessInstanceQuery()
                 .processInstanceId(processInstanceId)
                 .singleResult();
         if (historicProcessInstance != null) {
-            System.out.println(historicProcessInstance.getId() + "" +historicProcessInstance.getProcessDefinitionId()
-                    + "" + historicProcessInstance.getStartTime() + "" +historicProcessInstance.getEndTime()
+            System.out.println(historicProcessInstance.getId() + " " +historicProcessInstance.getProcessDefinitionId()
+                    + " " + historicProcessInstance.getStartTime() + " " +historicProcessInstance.getEndTime()
                     + " " + historicProcessInstance.getDurationInMillis());
         }
     }
@@ -38,11 +38,11 @@ public class HistoryQueryTest {
      */
     @Test
     public void findHistoryActiviti() {
-        String processInstanceId = "";
+        String processInstanceId = "2501";
         List<HistoricActivityInstance> list = processEngine.getHistoryService()
                 .createHistoricActivityInstanceQuery()
-                .processDefinitionId(processInstanceId)
-                .orderByHistoricActivityInstanceStartTime()
+                .processInstanceId(processInstanceId)
+                .orderByHistoricActivityInstanceStartTime().desc()
                 .list();
 
         if (!CollectionUtils.isEmpty(list)) {
@@ -58,7 +58,7 @@ public class HistoryQueryTest {
      */
     @Test
     public void findHistoryTask() {
-        String processInstanceId = "2101";
+        String processInstanceId = "2501";
         List<HistoricTaskInstance> list = processEngine.getHistoryService()
                 .createHistoricTaskInstanceQuery()
                 .processInstanceId(processInstanceId)
@@ -66,7 +66,8 @@ public class HistoryQueryTest {
                 .list();
         if (!CollectionUtils.isEmpty(list)) {
             for (HistoricTaskInstance hti : list) {
-                System.out.println(hti.getId() + "" + hti.getName() + "" + hti.getProcessInstanceId() + "" + hti.getStartTime() + " " + hti.getEndTime());
+                System.out.println(hti.getId() + " " + hti.getName() + " " + hti.getProcessInstanceId()
+                        + " " + hti.getStartTime() + " " + hti.getEndTime());
             }
         }
     }
@@ -76,7 +77,7 @@ public class HistoryQueryTest {
      */
     @Test
     public void findHistoryProcessVariables() {
-        String processInstanceId = "2101";
+        String processInstanceId = "2501";
         List<HistoricVariableInstance> list = processEngine.getHistoryService()
                 .createHistoricVariableInstanceQuery()
                 .processInstanceId(processInstanceId)

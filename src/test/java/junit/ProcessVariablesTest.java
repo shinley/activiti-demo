@@ -19,7 +19,7 @@ public class ProcessVariablesTest {
     @Test
     public void setVariables() {
         TaskService taskService = processEngine.getTaskService();
-        String taskId = "1504";
+        String taskId = "2504";
         taskService.setVariableLocal(taskId, "请假天数",3 ); // 与任务ID绑定
         taskService.setVariable(taskId, "请假日期", new Date());
         taskService.setVariable(taskId, "请假原因", "回家控亲");
@@ -38,7 +38,7 @@ public class ProcessVariablesTest {
         /**
          * 任务ID
          */
-        String taksId = "1504";
+        String taksId = "2504";
         Integer day = (Integer) taskService.getVariable(taksId, "请假天数");
         Date date = (Date) taskService.getVariable(taksId, "请假日期");
         String reason = (String) taskService.getVariable(taksId, "请假原因");

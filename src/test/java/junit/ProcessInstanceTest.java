@@ -62,11 +62,11 @@ public class ProcessInstanceTest {
      */
     @Test
     public void isProcessEnd() {
-        String processInstancedId = "";
+        String processInstancedId = "2501";
         RuntimeService runtimeService = processEngine.getRuntimeService();
 
         ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
-                .processDefinitionId(processInstancedId)
+                .processInstanceId(processInstancedId)
                 .singleResult();
         if (processInstance == null) {
             System.out.println("流程已经结束");
@@ -98,14 +98,14 @@ public class ProcessInstanceTest {
      */
     @Test
     public void findHistoryProcessInstance() {
-        String processInstanceId = "1001";
+        String processInstanceId = "2501";
         HistoricProcessInstance historicProcessInstance = processEngine.getHistoryService()
                 .createHistoricProcessInstanceQuery()
                 .processInstanceId(processInstanceId)
                 .singleResult();
         if (historicProcessInstance != null) {
-            System.out.println(historicProcessInstance.getId() + "" +historicProcessInstance.getProcessDefinitionId()
-                    + "" + historicProcessInstance.getStartTime() + "" +historicProcessInstance.getEndTime()
+            System.out.println(historicProcessInstance.getId() + " " +historicProcessInstance.getProcessDefinitionId()
+                    + " " + historicProcessInstance.getStartTime() + " " +historicProcessInstance.getEndTime()
                     + " " + historicProcessInstance.getDurationInMillis());
         }
     }

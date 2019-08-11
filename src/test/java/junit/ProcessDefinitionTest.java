@@ -74,7 +74,7 @@ public class ProcessDefinitionTest {
                 System.out.println("流程定义的key:" + pd.getKey());        // 对应helloworld.bpmn文件中的id属性值
                 System.out.println("流程定义的版本" + pd.getVersion());
                 System.out.println("资源名称bpmn文件：" + pd.getResourceName());
-                System.out.println("资源名称png文件：" + pd.getDeploymentId());
+                System.out.println("资源名称png文件：" + pd.getDiagramResourceName());
                 System.out.println("部署对象ID:" + pd.getDeploymentId());
                 System.out.println("###############################################3");
             }
