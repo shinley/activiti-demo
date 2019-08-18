@@ -1,4 +1,4 @@
-package com.shinley.activiti.aop;
+package com.shinley.activiti.common;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

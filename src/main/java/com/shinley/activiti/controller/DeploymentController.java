@@ -1,8 +1,7 @@
 package com.shinley.activiti.controller;
 
-import com.shinley.activiti.aop.CommonException;
+import com.shinley.activiti.common.CommonException;
 import org.activiti.engine.RepositoryService;
-import org.activiti.engine.impl.persistence.entity.DeploymentEntity;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

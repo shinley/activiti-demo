@@ -1,4 +1,4 @@
-package com.shinley.activiti.aop;
+package com.shinley.activiti.common;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
