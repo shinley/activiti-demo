@@ -7,14 +7,14 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-public class CommonResult<T> implements Serializable {
+public class CommonResult implements Serializable {
 
 
-    public CommonResult(T data) {
+    public CommonResult(Object data) {
         this.data = data;
     }
 
     private int code = 200;
-    private String message;
-    private T data;
+    private String message = "success";
+    private Object data;
 }

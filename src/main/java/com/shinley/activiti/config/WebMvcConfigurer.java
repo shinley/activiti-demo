@@ -18,10 +18,12 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonConfig config = new FastJsonConfig();
         config.setSerializerFeatures(SerializerFeature.WriteNullListAsEmpty,
-                SerializerFeature.WriteMapNullValue,
+//                SerializerFeature.WriteMapNullValue,
                 SerializerFeature.WriteNullStringAsEmpty,//字符串null返回空字符串
                 SerializerFeature.WriteNullBooleanAsFalse,
-                SerializerFeature.PrettyFormat);
+                SerializerFeature.PrettyFormat,
+                SerializerFeature.IgnoreNonFieldGetter,
+                SerializerFeature.IgnoreErrorGetter);
 
         List<MediaType> mediaTypeList=new ArrayList<>();
         mediaTypeList.add(MediaType.APPLICATION_JSON_UTF8);
