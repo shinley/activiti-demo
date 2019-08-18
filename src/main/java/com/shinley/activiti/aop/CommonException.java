@@ -1,0 +1,8 @@
+package com.shinley.activiti.aop;
+
+public class CommonException extends RuntimeException {
+    public CommonException(String message) {
+        super(message);
+    }
+
+}

@@ -1,5 +1,6 @@
 package com.shinley.activiti.controller;
 
+import com.shinley.activiti.aop.CommonException;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.impl.persistence.entity.DeploymentEntity;
 import org.activiti.engine.repository.Deployment;
@@ -27,6 +28,9 @@ public class DeploymentController {
     @GetMapping("/activiti/deployment/list")
     public List<Deployment> deploymentList() {
         List<Deployment> list = repositoryService.createDeploymentQuery().list();
+        if (true) {
+            throw new CommonException("测试异常");
+        }
         return list;
     }
 
