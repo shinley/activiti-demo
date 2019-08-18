@@ -5,6 +5,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 @ControllerAdvice
@@ -24,5 +26,14 @@ public class ResponseHandler implements ResponseBodyAdvice {
         CommonResult result = new CommonResult();
         result.setData(o);
         return result;
+    }
+
+    @ExceptionHandler(CommonException.class)
+    @ResponseBody
+    public CommonResult handleException(CommonException commonException) {
+        CommonResult commonResult = new CommonResult();
+        commonResult.setCode(500);
+        commonResult.setMessage(commonException.getMessage());
+        return commonResult;
     }
 }
