@@ -4,6 +4,7 @@ import com.alibaba.fastjson.support.config.FastJsonConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -34,6 +35,15 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         converter.setFastJsonConfig(config);
         converter.setSupportedMediaTypes(mediaTypeList);
         converters.add(converter);
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        super.addCorsMappings(registry);
+        registry.addMapping("/**")
+                .allowedMethods("*")
+                .allowedOrigins("*")
+                .allowedHeaders("*");
     }
 }
 
