@@ -1,9 +1,11 @@
 package com.shinley.activiti.config;
 
 import com.alibaba.fastjson.support.config.FastJsonConfig;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -44,6 +46,15 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
                 .allowedMethods("*")
                 .allowedOrigins("*")
                 .allowedHeaders("*");
+    }
+
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver multipartResolver =  new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(38000000L);
+        multipartResolver.setMaxInMemorySize(4096);
+        multipartResolver.setDefaultEncoding("UTF-8");
+        return multipartResolver;
     }
 }
 
