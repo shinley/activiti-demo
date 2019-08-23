@@ -8,10 +8,7 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -37,6 +34,11 @@ public class DeploymentController {
         List<Deployment> list = repositoryService.createDeploymentQuery().deploymentNameLike("%"+keyword+"%").listPage(start, pageSize);
         deploymentListResponse.setList(list);
         deploymentListResponse.setTotal(total);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return deploymentListResponse;
     }
 
@@ -59,6 +61,12 @@ public class DeploymentController {
                 .name(deploymentName)
                 .addZipInputStream(zipInputStream)
                 .deploy();
+        return "sucess";
+    }
+
+    @DeleteMapping(value = "/activiti/deployment/delete")
+    public String delete(@RequestParam("deploymentId") String deploymentId) {
+        repositoryService.deleteDeployment(deploymentId);
         return "sucess";
     }
 
