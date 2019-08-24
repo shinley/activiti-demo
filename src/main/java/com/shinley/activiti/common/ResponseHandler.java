@@ -36,4 +36,13 @@ public class ResponseHandler implements ResponseBodyAdvice {
         commonResult.setMessage(commonException.getMessage());
         return commonResult;
     }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public CommonResult handleAllException(Exception exception) {
+        CommonResult commonResult = new CommonResult();
+        commonResult.setCode(500);
+        commonResult.setMessage(exception.getMessage());
+        return commonResult;
+    }
 }

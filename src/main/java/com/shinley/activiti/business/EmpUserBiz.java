@@ -1,6 +1,8 @@
 package com.shinley.activiti.business;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shinley.activiti.dao.EmpUserDao;
 import com.shinley.activiti.model.EmpUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +29,13 @@ public class EmpUserBiz {
             return true;
         }
         return false;
+    }
+
+    public IPage<EmpUser> pagenation(int pageIndex, int pageSize) {
+        QueryWrapper<EmpUser> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("id");
+        Page<EmpUser> empUserPage = new Page<>(pageIndex, pageSize);
+        IPage<EmpUser> empUserIPage = empUserDao.selectPage(empUserPage, queryWrapper);
+        return empUserIPage;
     }
 }
