@@ -27,4 +27,11 @@ public class LoginController {
         }
         return false;
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public boolean logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute("userName");
+        return true;
+    }
 }
