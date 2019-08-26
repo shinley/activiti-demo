@@ -1,13 +1,16 @@
 package com.shinley.activiti.business;
 
+import com.shinley.activiti.model.ProcessDefinitionModel;
 import com.shinley.activiti.model.response.ProcessDefinitionListResponse;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -30,7 +33,21 @@ public class ProcessDefinitionBiz {
                 .processDefinitionNameLike("%"+keyword+"%")
                 .latestVersion()
                 .listPage(start, pageSize);
-        processDefinitionListResponse.setList(list);
+
+        List<ProcessDefinitionModel> processDefinitionModels = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(list)) {
+            for (ProcessDefinition processDefinition : list) {
+                ProcessDefinitionModel processDefinitionModel = new ProcessDefinitionModel();
+                processDefinitionModel.setId(processDefinition.getId());
+                processDefinitionModel.setName(processDefinition.getName());
+                processDefinitionModel.setKey(processDefinition.getKey());
+                processDefinitionModel.setVersion(processDefinition.getVersion());
+                processDefinitionModel.setDeploymentId(processDefinition.getDeploymentId());
+                processDefinitionModel.setDiagramResourceName(processDefinition.getDiagramResourceName());
+                processDefinitionModels.add(processDefinitionModel);
+            }
+        }
+        processDefinitionListResponse.setList(processDefinitionModels);
         processDefinitionListResponse.setTotal(count);
         return processDefinitionListResponse;
     }

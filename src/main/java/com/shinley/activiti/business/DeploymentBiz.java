@@ -1,16 +1,19 @@
 package com.shinley.activiti.business;
 
 import com.shinley.activiti.common.CommonException;
+import com.shinley.activiti.model.DeploymentModel;
 import com.shinley.activiti.model.response.DeploymentListResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Deployment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipInputStream;
 
@@ -27,7 +30,17 @@ public class DeploymentBiz {
         long total = repositoryService.createDeploymentQuery().deploymentNameLike("%"+keyword+"%").count();
         int start = (pageIndex - 1) * pageSize;
         List<Deployment> list = repositoryService.createDeploymentQuery().deploymentNameLike("%"+keyword+"%").listPage(start, pageSize);
-        deploymentListResponse.setList(list);
+        List<DeploymentModel> deploymentModels = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(list)) {
+            for (Deployment deployment : list) {
+                DeploymentModel deploymentModel = new DeploymentModel();
+                deploymentModel.setId(deployment.getId());
+                deploymentModel.setName(deployment.getName());
+                deploymentModel.setDeployTime(deployment.getDeploymentTime());
+                deploymentModels.add(deploymentModel);
+            }
+        }
+        deploymentListResponse.setList(deploymentModels);
         deploymentListResponse.setTotal(total);
         return deploymentListResponse;
     }

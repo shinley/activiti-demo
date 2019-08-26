@@ -1,7 +1,7 @@
 package com.shinley.activiti.model.response;
 
+import com.shinley.activiti.model.DeploymentModel;
 import lombok.Data;
-import org.activiti.engine.repository.Deployment;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,6 +9,6 @@ import java.util.List;
 @Data
 public class DeploymentListResponse implements Serializable {
     private long total;
-    private List<Deployment> list;
+    private List<DeploymentModel> list;
 
 }
