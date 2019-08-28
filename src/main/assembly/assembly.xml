@@ -29,9 +29,6 @@
 			<directory>src/main/resources</directory>
 			<outputDirectory>conf</outputDirectory>
 			<fileMode>0644</fileMode>
-			<excludes>
-				<exclude>a*</exclude>
-			</excludes>
 		</fileSet>
 		<fileSet>
 			<outputDirectory>/</outputDirectory>
