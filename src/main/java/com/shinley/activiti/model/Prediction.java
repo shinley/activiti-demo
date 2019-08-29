@@ -1,0 +1,44 @@
+package com.shinley.activiti.model;
+
+import lombok.Data;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+/**
+ * 预测的股票价格
+ * @author shinley
+ */
+@Data
+public class Prediction implements Serializable {
+    private int id;
+    /**
+     * 股票代码
+     */
+    private String code;
+    /**
+     * 最高价
+     */
+    private String highestPrice;
+    /**
+     * 次高价
+     */
+    private String secondHighPrice;
+    /**
+     * 次低价
+     */
+    private String secondLowPrice;
+    /**
+     * 最低价
+     */
+    private String lowestPrice;
+    /**
+     * 预测日期
+     */
+    private LocalDate date;
+    /**
+     * 创建日期
+     */
+    private LocalDateTime createTime;
+}
