@@ -21,6 +21,7 @@ INSERT INTO activiti.emp_user (id, user_name, password, email, role, manager_id)
 create table stock_daily (
      id int not null auto_increment primary key,
      code varchar(50) not null default '' comment '股票代码',
+     name varchar(50) not null default '' comment '股票名称',
      open_price varchar(50) not null  default '' comment '开肋价',
      heigh_price varchar(50) not null default '' comment '最大值',
      low_price varchar(50) not null default '' comment '最小值',
@@ -35,6 +36,7 @@ create table stock_daily (
 create table  prediction (
      id int not null auto_increment primary key,
      code varchar(50) not null default '' comment '股票代码',
+     name varchar(50) not null default '' comment '股票名称',
      highest_price varchar(50)  not null default '' comment '最高价',
      second_high_price varchar(50) not null default '' comment '次高价',
      second_low_price varchar(50) not null default '' comment '次低价',

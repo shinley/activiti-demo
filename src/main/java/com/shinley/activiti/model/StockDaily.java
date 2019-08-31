@@ -20,6 +20,10 @@ public class StockDaily implements Serializable {
      */
     private String code;
     /**
+     * 开盘价
+     */
+    private String openPrice;
+    /**
      * 最高价
      */
     private String heightPrice;
@@ -27,6 +31,10 @@ public class StockDaily implements Serializable {
      * 最低价
      */
     private String lowPrice;
+    /**
+     * 收盘价
+     */
+    private String closePrice;
     /**
      * 平均价
      */
