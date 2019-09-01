@@ -72,13 +72,25 @@ public class StockDailyBiz {
 
         QueryWrapper<Prediction> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("code", code);
+
+        DayOfWeek dayOfWeek = now.getDayOfWeek();
+        String day = dayOfWeek.toString();
+
         // 如果在15:10以前, 查询当天的,
         if (now.isBefore(afternoon1510)) {
             queryWrapper.eq("date", nowDate);
         }
+
+        LocalDate nextDay = nextDay = nowDate.plusDays(1);
+        if (DayOfWeek.FRIDAY.name().equalsIgnoreCase(day)) {
+            nextDay = nowDate.plusDays(3);
+        }
+        if (DayOfWeek.SATURDAY.name().equalsIgnoreCase(day)) {
+            nextDay = nowDate.plusDays(2);
+        }
+
         // 如果在15:10以后,要是询第二天的数据
         if (now.isAfter(afternoon1510)) {
-            LocalDate nextDay = nowDate.plusDays(1);
             queryWrapper.eq("date", nextDay);
         }
         Prediction prediction = predictionDao.selectOne(queryWrapper);
