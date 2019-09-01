@@ -30,7 +30,7 @@ public class StockDaily implements Serializable {
     /**
      * 最高价
      */
-    private String heightPrice;
+    private String heighPrice;
     /**
      * 最低价
      */

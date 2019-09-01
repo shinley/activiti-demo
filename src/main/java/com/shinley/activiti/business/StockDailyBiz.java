@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -29,10 +30,10 @@ public class StockDailyBiz {
         // 计算次日股票数据
         String avgPrice = stockDaily.getAvgPrice();
         String lowPrice = stockDaily.getLowPrice();
-        String heightPrice = stockDaily.getHeightPrice();
+        String heighPrice = stockDaily.getHeighPrice();
         BigDecimal avgBigDecimal = new BigDecimal(avgPrice);
         BigDecimal lowBigDecimal = new BigDecimal(lowPrice);
-        BigDecimal heighBigDecimal = new BigDecimal(heightPrice);
+        BigDecimal heighBigDecimal = new BigDecimal(heighPrice);
 
         BigDecimal nextHeighPrice = this.getNextHeighPrice(avgBigDecimal, heighBigDecimal, lowBigDecimal);
         BigDecimal nextSecondHeighPrice = this.getNextSecondHeighPrice(avgBigDecimal, lowBigDecimal);
@@ -40,7 +41,13 @@ public class StockDailyBiz {
         BigDecimal nextLowestPrice = this.getNextLowestPrice(avgBigDecimal, heighBigDecimal, lowBigDecimal);
 
         LocalDate date = stockDaily.getDate();
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+        String day = dayOfWeek.toString();
         LocalDate nextDay = date.plusDays(1);
+        if ("FRIDAY".equalsIgnoreCase(day)) {
+            nextDay = date.plusDays(3);
+        }
+
         Prediction prediction = new Prediction();
         prediction.setCode(stockDaily.getCode());
         prediction.setCode(stockDaily.getCode());

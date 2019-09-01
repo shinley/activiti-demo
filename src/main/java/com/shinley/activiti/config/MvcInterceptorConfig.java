@@ -21,7 +21,9 @@ public class MvcInterceptorConfig extends WebMvcConfigurationSupport {
         // excludePathPatterns 用户排除拦截
         registry.addInterceptor(loginInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/login**");
+                .excludePathPatterns("/login**")
+                .excludePathPatterns("/stock/daily/add");
+
         super.addInterceptors(registry);
     }
 }

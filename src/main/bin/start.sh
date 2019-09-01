@@ -66,7 +66,7 @@ else
     JAVA_MEM_OPTS=" -server -Xms1g -Xmx1g -XX:PermSize=128m -XX:SurvivorRatio=2 -XX:+UseParallelGC "
 fi
 
-JAVA_GC_OPTS=" -XX:+DisableExplicitGC -XX:+UseG1GC -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+PrintGCDateStamps -XX:+PrintGCDetails -XX:ErrorFile=/var/log/igoal/java_error.log -XX:HeapDumpPath=/var/log/igoal -XX:+HeapDumpOnOutOfMemoryError -XX:MaxGCPauseMillis=500 -Xloggc:/var/log/igoal/default-gc${date_str}_igoal.log "
+JAVA_GC_OPTS=" -XX:+DisableExplicitGC -XX:+UseG1GC -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+PrintGCDateStamps -XX:+PrintGCDetails -XX:ErrorFile=/var/log/activiti_demo/java_error.log -XX:HeapDumpPath=/var/log/activiti_demo -XX:+HeapDumpOnOutOfMemoryError -XX:MaxGCPauseMillis=500 -Xloggc:/var/log/activiti_demo/default-gc${date_str}_activiti_demo.log "
 
 echo -e "Starting the $SERVER_NAME ...\c"
 nohup java $JAVA_OPTS $JAVA_MEM_OPTS \
