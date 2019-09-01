@@ -8,15 +8,23 @@ import java.time.LocalDateTime;
 
 /**
  * 预测的股票价格
+ *
  * @author shinley
  */
 @Data
 public class Prediction implements Serializable {
+    /**
+     * 主键
+     */
     private int id;
     /**
      * 股票代码
      */
     private String code;
+    /**
+     * 股票名称
+     */
+    private String name;
     /**
      * 最高价
      */

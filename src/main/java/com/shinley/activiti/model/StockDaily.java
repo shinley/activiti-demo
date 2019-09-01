@@ -20,6 +20,10 @@ public class StockDaily implements Serializable {
      */
     private String code;
     /**
+     * 股票名称
+     */
+    private String name;
+    /**
      * 开盘价
      */
     private String openPrice;
