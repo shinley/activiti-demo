@@ -13,6 +13,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Component
 public class StockDailyBiz {
@@ -51,7 +53,7 @@ public class StockDailyBiz {
         Prediction prediction = new Prediction();
         prediction.setCode(stockDaily.getCode());
         prediction.setCode(stockDaily.getCode());
-        prediction.setDate(nextDay);
+        prediction.setStockDate(nextDay);
         prediction.setHighestPrice(nextHeighPrice.toString());
         prediction.setLowestPrice(nextLowestPrice.toString());
         prediction.setSecondHighPrice(nextSecondHeighPrice.toString());
@@ -65,6 +67,8 @@ public class StockDailyBiz {
      * @return
      */
     public Prediction findPrediction(String code) {
+
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
         LocalDate nowDate = LocalDate.now();
         LocalTime time = LocalTime.of(15, 10);
@@ -78,7 +82,8 @@ public class StockDailyBiz {
 
         // 如果在15:10以前, 查询当天的,
         if (now.isBefore(afternoon1510)) {
-            queryWrapper.eq("date", nowDate);
+            String dateStr = df.format(nowDate);
+            queryWrapper.apply("date_format(stock_date, '%Y-%m-%d')={0}", dateStr);
         }
 
         LocalDate nextDay = nextDay = nowDate.plusDays(1);
@@ -89,12 +94,14 @@ public class StockDailyBiz {
             nextDay = nowDate.plusDays(2);
         }
 
+
         // 如果在15:10以后,要是询第二天的数据
         if (now.isAfter(afternoon1510)) {
-            queryWrapper.eq("date", nextDay);
+            String dateStr = df.format(nextDay);
+            queryWrapper.apply("date_format(stock_date, '%Y-%m-%d')={0}", "2019-09-02");
         }
-        Prediction prediction = predictionDao.selectOne(queryWrapper);
-        return prediction;
+        List<Prediction> prediction = predictionDao.selectList(queryWrapper);
+        return prediction.get(0);
     }
 
     /**

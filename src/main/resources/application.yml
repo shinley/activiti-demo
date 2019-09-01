@@ -30,6 +30,7 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+      driver-class-name: com.mysql.cj.jdbc.Driver
   activiti:
     database-schema-update: true
     check-process-definitions: false
@@ -67,4 +68,4 @@ mybatis-plus:
 
 logging:
   level:
-    com.shinley.dao : debug
+    com.shinley.dao : trace
