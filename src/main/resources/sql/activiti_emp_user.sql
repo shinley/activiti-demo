@@ -25,11 +25,11 @@ create table stock_daily (
      open_price varchar(50) not null  default '' comment '开肋价',
      heigh_price varchar(50) not null default '' comment '最大值',
      low_price varchar(50) not null default '' comment '最小值',
-     close_prive varchar(50) not null default '' comment '收盘价',
+     close_price varchar(50) not null default '' comment '收盘价',
      avg_price varchar(50) not null default '' comment '平均值',
      top_limit varchar(50) not null default '' comment '涨停价',
      down_limit varchar(50) not null  default '' comment '跌停价',
-     date date  not null comment '日期',
+     stock_date date  not null comment '日期',
      create_time datetime not null default current_timestamp comment '创建时间'
 );
 
@@ -41,6 +41,6 @@ create table  prediction (
      second_high_price varchar(50) not null default '' comment '次高价',
      second_low_price varchar(50) not null default '' comment '次低价',
      lowest_price varchar(50) not null  default '' comment '最低价',
-     date date not null  comment '预测哪天的股价',
+     stock_date date not null  comment '预测哪天的股价',
      create_time datetime not null default current_timestamp comment '创建时间'
 )
