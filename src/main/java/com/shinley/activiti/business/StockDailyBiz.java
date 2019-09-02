@@ -98,6 +98,46 @@ public class StockDailyBiz {
     }
 
     /**
+     * 自助预估
+     * @return
+     */
+    public Prediction selfPrediction(StockDaily stockDaily) {
+        String lowPrice = stockDaily.getLowPrice();
+        String heighPrice = stockDaily.getHeighPrice();
+        String closePrice = stockDaily.getClosePrice();
+
+        BigDecimal lowBigDecimal = new BigDecimal(lowPrice);
+        BigDecimal heighBigDecimal = new BigDecimal(heighPrice);
+        BigDecimal closeBigDecimal = new BigDecimal(closePrice);
+
+        BigDecimal avgBigDecimal = this.getAvgPrice(heighBigDecimal, lowBigDecimal, closeBigDecimal);
+
+        BigDecimal nextHeighPrice = this.getNextHeighPrice(avgBigDecimal, heighBigDecimal, lowBigDecimal);
+        BigDecimal nextSecondHeighPrice = this.getNextSecondHeighPrice(avgBigDecimal, lowBigDecimal);
+        BigDecimal nextSecondLowPrice = this.getNextSecondLowPrice(avgBigDecimal, heighBigDecimal);
+        BigDecimal nextLowestPrice = this.getNextLowestPrice(avgBigDecimal, heighBigDecimal, lowBigDecimal);
+        Prediction prediction = new Prediction();
+        prediction.setHighestPrice(nextHeighPrice.toString());
+        prediction.setSecondHighPrice(nextSecondHeighPrice.toString());
+        prediction.setSecondLowPrice(nextSecondLowPrice.toString());
+        prediction.setLowestPrice(nextLowestPrice.toString());
+        return prediction;
+    }
+
+    /**
+     * 计算平均价, 自助预估时才需要计算, 爬取网站数据时,能直接取到
+     */
+    private BigDecimal getAvgPrice(BigDecimal heighPrice, BigDecimal lowPrice, BigDecimal closePrice) {
+        BigDecimal two = new BigDecimal("2");
+        BigDecimal heighAndLow = heighPrice.add(lowPrice);
+        BigDecimal doubleClose = closePrice.multiply(two);
+
+        BigDecimal four = new BigDecimal("4");
+        BigDecimal allPrice = heighAndLow.add(doubleClose);
+        return allPrice.divide(four);
+    }
+
+    /**
      * 获取第二天的最高价
      * @return
      */

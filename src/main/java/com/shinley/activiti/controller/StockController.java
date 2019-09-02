@@ -22,4 +22,9 @@ public class StockController {
         return stockDailyBiz.findPrediction(code);
     }
 
+    @PostMapping("/stock/selfPrediction")
+    public Prediction selfPrediction(@RequestBody StockDaily stockDaily) {
+        return stockDailyBiz.selfPrediction(stockDaily);
+    }
+
 }
