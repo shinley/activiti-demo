@@ -74,34 +74,29 @@ public class StockDailyBiz {
         LocalTime time = LocalTime.of(15, 10);
         LocalDateTime afternoon1510 = LocalDateTime.of(nowDate, time);
 
-        QueryWrapper<Prediction> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("code", code);
-
         DayOfWeek dayOfWeek = now.getDayOfWeek();
         String day = dayOfWeek.toString();
 
+        LocalDate nextDay =null;
+
         // 如果在15:10以前, 查询当天的,
         if (now.isBefore(afternoon1510)) {
-            String dateStr = df.format(nowDate);
-            queryWrapper.apply("date_format(stock_date, '%Y-%m-%d')={0}", dateStr);
+            nextDay = nowDate;
         }
-
-        LocalDate nextDay = nextDay = nowDate.plusDays(1);
-        if (DayOfWeek.FRIDAY.name().equalsIgnoreCase(day)) {
-            nextDay = nowDate.plusDays(3);
-        }
-        if (DayOfWeek.SATURDAY.name().equalsIgnoreCase(day)) {
-            nextDay = nowDate.plusDays(2);
-        }
-
 
         // 如果在15:10以后,要是询第二天的数据
         if (now.isAfter(afternoon1510)) {
-            String dateStr = df.format(nextDay);
-            queryWrapper.apply("date_format(stock_date, '%Y-%m-%d')={0}", "2019-09-02");
+            nextDay = nowDate.plusDays(1);
+            if (DayOfWeek.FRIDAY.name().equalsIgnoreCase(day)) {
+                nextDay = nowDate.plusDays(3);
+            }
+            if (DayOfWeek.SATURDAY.name().equalsIgnoreCase(day)) {
+                nextDay = nowDate.plusDays(2);
+            }
         }
-        List<Prediction> prediction = predictionDao.selectList(queryWrapper);
-        return prediction.get(0);
+
+        Prediction prediction = predictionDao.findPredictionByCodeDate(code, nextDay);
+        return prediction;
     }
 
     /**

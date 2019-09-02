@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shinley.activiti.dao.PredictionDao">
-    <select id="">
-        select * from pre
+    <select id="findPredictionByCodeDate" resultType="com.shinley.activiti.model.Prediction">
+        select * from prediction where code=#{code} and stock_date=#{stockDate}
     </select>
 
 </mapper>
