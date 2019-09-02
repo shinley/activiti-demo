@@ -1,6 +1,5 @@
 package com.shinley.activiti.business;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.shinley.activiti.dao.PredictionDao;
 import com.shinley.activiti.dao.StockDailyDao;
 import com.shinley.activiti.model.Prediction;
@@ -14,7 +13,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @Component
 public class StockDailyBiz {
@@ -42,7 +40,7 @@ public class StockDailyBiz {
         BigDecimal nextSecondLowPrice = this.getNextSecondLowPrice(avgBigDecimal, heighBigDecimal);
         BigDecimal nextLowestPrice = this.getNextLowestPrice(avgBigDecimal, heighBigDecimal, lowBigDecimal);
 
-        LocalDate date = stockDaily.getDate();
+        LocalDate date = stockDaily.getStockDate();
         DayOfWeek dayOfWeek = date.getDayOfWeek();
         String day = dayOfWeek.toString();
         LocalDate nextDay = date.plusDays(1);
@@ -52,7 +50,7 @@ public class StockDailyBiz {
 
         Prediction prediction = new Prediction();
         prediction.setCode(stockDaily.getCode());
-        prediction.setCode(stockDaily.getCode());
+        prediction.setName(stockDaily.getName());
         prediction.setStockDate(nextDay);
         prediction.setHighestPrice(nextHeighPrice.toString());
         prediction.setLowestPrice(nextLowestPrice.toString());

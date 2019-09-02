@@ -54,7 +54,7 @@ public class StockDaily implements Serializable {
     /**
      * 日期
      */
-    private LocalDate date;
+    private LocalDate stockDate;
     /**
      * 创建日期
      */
