@@ -80,6 +80,15 @@ public class StockDailyBiz {
         // 如果在15:10以前, 查询当天的,
         if (now.isBefore(afternoon1510)) {
             nextDay = nowDate;
+            if (DayOfWeek.FRIDAY.name().equalsIgnoreCase(day)) {
+                nextDay = nowDate.plusDays(3);
+            }
+            if (DayOfWeek.SATURDAY.name().equalsIgnoreCase(day)) {
+                nextDay = nowDate.plusDays(2);
+            }
+            if (DayOfWeek.SUNDAY.name().equalsIgnoreCase(day)) {
+                nextDay = nowDate.plusDays(1);
+            }
         }
 
         // 如果在15:10以后,要是询第二天的数据
