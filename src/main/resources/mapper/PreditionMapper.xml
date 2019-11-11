@@ -3,7 +3,7 @@
 
 <mapper namespace="com.shinley.activiti.dao.PredictionDao">
     <select id="findPredictionByCodeDate" resultType="com.shinley.activiti.model.Prediction">
-        select * from prediction where code=#{code} and stock_date=#{stockDate}
+        select * from prediction where code=#{code} and stock_date=#{stockDate} limit 1
     </select>
 
 </mapper>
